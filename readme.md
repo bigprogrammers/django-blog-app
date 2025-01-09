@@ -136,7 +136,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ## Acknowledgments
 
 - Django Documentation: <https://docs.djangoproject.com/>
-- Bootstrap: <https://getbootstrap.com/>
+- Tailwindcss: <https://tailwindcss.com/>
 - Any additional libraries or inspirations you used for the project.
 
 ---
