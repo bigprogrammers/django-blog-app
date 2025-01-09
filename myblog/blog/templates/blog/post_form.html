@@ -1,0 +1,104 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto mt-8">
+    <div class="bg-white shadow-md rounded-lg p-6">
+        <h2 class="text-2xl font-bold mb-6">
+            {% if form.instance.pk %}
+                Edit Post
+            {% else %}
+                Create New Post
+            {% endif %}
+        </h2>
+
+        <form method="POST" class="space-y-6">
+            {% csrf_token %}
+            
+            {% if form.non_field_errors %}
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <div class="space-y-4">
+                <!-- Title Field -->
+                <div>
+                    <label for="{{ form.title.id_for_label }}" class="block text-sm font-medium text-gray-700">
+                        Title
+                    </label>
+                    <div class="mt-1">
+                        {{ form.title }}
+                        {% if form.title.errors %}
+                            <div class="text-red-500 text-sm mt-1">
+                                {{ form.title.errors.0 }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Content Field -->
+                <div>
+                    <label for="{{ form.content.id_for_label }}" class="block text-sm font-medium text-gray-700">
+                        Content
+                    </label>
+                    <div class="mt-1">
+                        {{ form.content }}
+                        {% if form.content.errors %}
+                            <div class="text-red-500 text-sm mt-1">
+                                {{ form.content.errors.0 }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Categories Field -->
+                <div>
+                    <label for="{{ form.categories.id_for_label }}" class="block text-sm font-medium text-gray-700">
+                        Categories
+                    </label>
+                    <div class="mt-1">
+                        {{ form.categories }}
+                        {% if form.categories.errors %}
+                            <div class="text-red-500 text-sm mt-1">
+                                {{ form.categories.errors.0 }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Tags Field -->
+                <div>
+                    <label for="{{ form.tags.id_for_label }}" class="block text-sm font-medium text-gray-700">
+                        Tags (comma separated)
+                    </label>
+                    <div class="mt-1">
+                        {{ form.tags }}
+                        {% if form.tags.errors %}
+                            <div class="text-red-500 text-sm mt-1">
+                                {{ form.tags.errors.0 }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-between mt-6">
+                <a href="{% url 'post-list' %}" 
+                   class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition">
+                    Cancel
+                </a>
+                <button type="submit" 
+                        class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">
+                    {% if form.instance.pk %}
+                        Update Post
+                    {% else %}
+                        Create Post
+                    {% endif %}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
